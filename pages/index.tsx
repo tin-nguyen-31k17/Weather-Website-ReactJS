@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import { Paper, TextInput, Button, Text, Group } from '@mantine/core'
+import { Paper, TextInput, Button, Text, Group } from "@mantine/core"
 import { useState } from 'react'
 
 // localhost:3000 -> Home
@@ -10,16 +10,24 @@ import { useState } from 'react'
 // Design the UI
 // Using the openweather API to call the data result
 
-const Home: NextPage = () => 
-{
-  return 
-  (
+const API_KEY = "d43e193aab8791bd97f1cac218090e18"
+
+const Home: NextPage = () =>
+{  
+  const [cityInput, setCityInput] = useState("");
+
+  async function getWeathterData() 
+  {
+    console.log("Button pressed");
+  }
+
+  return (
     <div
       style =
       {{
         position: 'static',
         height: '100vh',
-        backgroundImage: "url('https://littlevisuals.co/images/atlantic_ridge')",
+        backgroundImage: "url('https://littlevisuals.co/images/canal.jpg')",
         backgroundSize: 'cover',
       }}
       >
@@ -46,18 +54,20 @@ const Home: NextPage = () =>
           <Group position= 'apart'>
             <TextInput
             label = "City Name"
-            placeholder='ex: San Dieago'
+            placeholder="ex: San Dieago"
+            onChange={(e) => setCityInput(e.target.value)} // C -> setCityInput("C")  
             />
           </Group>
           <Group position= 'apart'>
-            <Button variant = "gradient" size = "xs">
+            <Button variant = "gradient" size = "md" onClick={() => getWeathterData}>
               Get Weather
             </Button>
           </Group>
         </Paper>
         </div>
     </div>
-  )  
+  
+  )
 }
 
 export default Home
